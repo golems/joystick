@@ -38,11 +38,11 @@ default: libjs.so
 .c.o:
 	$(CC) $(CXXFLAGS) -c $<
 
-pid_test: pid_test.c
-	$(CC) $(CXXFLAGS) -o $@ $< -ljs
-
 libjs.so: js.o $(HEADERS)
 	$(CC) -shared -Wl,-soname,$@ -o $@ $<
+
+jsstart: jsstart.c
+	$(CC) -o $@ $^ -ljs
 
 clean:
 	rm -fv *.o *.so pid_test
