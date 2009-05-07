@@ -33,7 +33,7 @@ HEADERS := $(addprefix include/js/,js.h)
 .PHONY: doc default clean stow
 
 
-default: libjs.so
+default: libjs.so jsstart
 
 .c.o:
 	$(CC) $(CXXFLAGS) -c $<
@@ -42,10 +42,10 @@ libjs.so: js.o $(HEADERS)
 	$(CC) -shared -Wl,-soname,$@ -o $@ $<
 
 jsstart: jsstart.c
-	$(CC) -o $@ $^ -ljs
+	$(CC) $(CXXFLAGS) -o $@ $^ -ljs
 
 clean:
-	rm -fv *.o *.so pid_test
+	rm -fv *.o *.so jsstart
 
 distclean: clean
 	rm -rf doc
@@ -64,6 +64,7 @@ stow: libjs.so
 	mkdir -p $(STOWPREFIX)/include/ssdmu
 	mkdir -p $(STOWPREFIX)/lib/
 	install --mode 755 libjs.so $(STOWPREFIX)/lib
+	install --mode 755 jsstart $(STOWPREFIX)/bin
 	install --mode 644 include/js/*.h $(STOWPREFIX)/include/js
 	cd $(STOWBASE) && stow $(STOWDIR)
 
@@ -72,4 +73,6 @@ install: libjs.so
 	mkdir -p $(PREFIX)/include/js
 	mkdir -p $(PREFIX)/lib/
 	install --mode 755 libjs.so $(PREFIX)/lib
+	install --mode 755 jsstart $(PREFIX)/bin
 	install --mode 644 include/js/*.h $(PREFIX)/include/js
+
