@@ -60,7 +60,7 @@ dist: distclean
 	cd .. &&               \
 	tar --exclude=.svn --lzma -cvf $(DISTPATH)/$(PROJECT)-$(VERSION).tar.lzma $(PROJECT)
 
-stow: libjs.so
+stow: default
 	mkdir -p $(STOWPREFIX)/include/ssdmu
 	mkdir -p $(STOWPREFIX)/lib/
 	install --mode 755 libjs.so $(STOWPREFIX)/lib
@@ -69,7 +69,7 @@ stow: libjs.so
 	cd $(STOWBASE) && stow $(STOWDIR)
 
 
-install: libjs.so
+install: default
 	mkdir -p $(PREFIX)/include/js
 	mkdir -p $(PREFIX)/lib/
 	install --mode 755 libjs.so $(PREFIX)/lib
