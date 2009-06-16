@@ -42,7 +42,7 @@ libjs.so: js.o $(HEADERS)
 	$(CC) -shared -Wl,-soname,$@ -o $@ $<
 
 jsstart: jsstart.c
-	$(CC) $(CXXFLAGS) -o $@ $^ -ljs
+	$(CC) $(CXXFLAGS) -o $@ $^ -ljs -L.
 
 clean:
 	rm -fv *.o *.so jsstart
