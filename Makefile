@@ -1,78 +1,21 @@
-## Makefile for libpidontrol
+## Makefile for js
 
-## Edit thise variables to configure installation path
-# root to install to for `make install'
-PREFIX := /usr/local
-# if you use stow, root of your stow package directory
-STOWBASE := /usr/local/stow
-# if you use stow, a name for this stow package
-
-## Mabe you care about these
-CC := gcc
-CXXFLAGS := -g -fPIC -I./include -Wall -Werror
-OCXXFLAGS := -O3 -funroll-loops -I./include
-
-
-## You probably don't care aboute these
 VERSION := 0.0.1
 PROJECT := libjs
 
-STOWDIR := $(PROJECT)-$(VERSION)
-STOWPREFIX := $(STOWBASE)/$(STOWDIR)
+LIBFILES := libjs.so
+BINFILES := jsstart
 
-DISTPATH := $(HOME)/prism/tarballs
-DOXPATH := $(HOME)/prism/public_html/dox
+default: $(LIBFILES) $(BINFILES)
 
+include /usr/share/make-common/common.1.mk
 
-
-
-HEADERS := $(addprefix include/js/,js.h)
-
+$(call LINKBIN, jsstart, jsstart.o, js)
+$(call LINKLIB, js, js.o)
 
 
-.PHONY: doc default clean stow
-
-
-default: libjs.so jsstart
-
-.c.o:
-	$(CC) $(CXXFLAGS) -c $<
-
-libjs.so: js.o $(HEADERS)
-	$(CC) -shared -Wl,-soname,$@ -o $@ $<
-
-jsstart: jsstart.c
-	$(CC) $(CXXFLAGS) -o $@ $^ -ljs -L.
-
-clean:
-	rm -fv *.o *.so jsstart
-
-distclean: clean
-	rm -rf doc
+clean: 
+	rm -vf *.o *.so jsstart
 
 doc:
 	doxygen
-
-docul: doc
-	cp -Tr doc/html $(DOXPATH)/$(PROJECT)
-
-dist: distclean
-	cd .. &&               \
-	tar --exclude=.svn --lzma -cvf $(DISTPATH)/$(PROJECT)-$(VERSION).tar.lzma $(PROJECT)
-
-stow: default
-	mkdir -p $(STOWPREFIX)/include/ssdmu
-	mkdir -p $(STOWPREFIX)/lib/
-	install --mode 755 libjs.so $(STOWPREFIX)/lib
-	install --mode 755 jsstart $(STOWPREFIX)/bin
-	install --mode 644 include/js/*.h $(STOWPREFIX)/include/js
-	cd $(STOWBASE) && stow $(STOWDIR)
-
-
-install: default
-	mkdir -p $(PREFIX)/include/js
-	mkdir -p $(PREFIX)/lib/
-	install --mode 755 libjs.so $(PREFIX)/lib
-	install --mode 755 jsstart $(PREFIX)/bin
-	install --mode 644 include/js/*.h $(PREFIX)/include/js
-
