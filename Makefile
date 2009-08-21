@@ -3,7 +3,7 @@
 VERSION := 0.0.2
 PROJECT := libjs
 
-LIBFILES := libjs.so
+SHAREDLIBS := js
 BINFILES := jsstart jsd jscat
 
 default: $(LIBFILES) $(BINFILES)
