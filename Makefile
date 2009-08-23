@@ -6,9 +6,11 @@ PROJECT := libjs
 SHAREDLIBS := js
 BINFILES := jsstart jsd jscat
 
-default: $(LIBFILES) $(BINFILES)
+default: all
 
 include /usr/share/make-common/common.1.mk
+
+all: $(LIBFILES) $(BINFILES)
 
 # apparently ach requires this, or at least c99
 CFLAGS += --std=gnu99
