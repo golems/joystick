@@ -1,6 +1,6 @@
 ## Makefile for js
 
-VERSION := 0.0.2
+VERSION := 0.0.3
 PROJECT := libjs
 
 SHAREDLIBS := js

@@ -1,7 +1,7 @@
 (use-package :genmsg)
 
 (defmsgstruct js-msg
-  (axes :double :dimension 8)
+  (axes :double :dimension *)
   ;; this is a bit array...
   (buttons :int32))
 
