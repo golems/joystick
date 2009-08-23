@@ -1,6 +1,6 @@
 ## Makefile for js
 
-VERSION := 0.0.3
+VERSION := 0.0.4
 PROJECT := libjs
 
 SHAREDLIBS := js
@@ -32,7 +32,7 @@ jscat.o: include/js/js_msg.h
 
 clean: 
 	rm -vf *.o *.so jsstart jsd include/js/js_msg.h jscat *.deb 
-	rm -rf .deps debian
+	rm -rf .deps debian doc $(PROJECT)-$(VERSION)
 
 doc:
 	doxygen
