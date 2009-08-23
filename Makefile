@@ -26,9 +26,13 @@ $(call LINKBIN, jscat, jscat.o, js ach pthread rt)
 $(call LINKLIB, js, js.o)
 
 
+## must explicitly specify for the generate header
+jsd.o: include/js/js_msg.h
+jscat.o: include/js/js_msg.h
+
 clean: 
-	rm -vf *.o *.so jsstart jsd
-	rm -rf .deps
+	rm -vf *.o *.so jsstart jsd include/js/js_msg.h jscat *.deb 
+	rm -rf .deps debian
 
 doc:
 	doxygen
