@@ -31,7 +31,7 @@ jsd.o: include/js/js_msg.h
 jscat.o: include/js/js_msg.h
 
 clean: 
-	rm -vf *.o *.so jsstart jsd include/js/js_msg.h jscat *.deb 
+	rm -vf *.o *.so jsstart jsd include/js/js_msg.h jscat *.deb  *.lzma
 	rm -rf .deps debian doc $(PROJECT)-$(VERSION)
 
 doc:
