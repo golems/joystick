@@ -1,38 +1,32 @@
-## Makefile for js
+# Project Name
+PROJECT := snachd
 
-VERSION := 0.0.5
-PROJECT := libjs
+# Project Version 
+VERSION := 0.1
 
-SHAREDLIBS := js
-BINFILES := jsstart jsd jscat
+# Binary Files
+BINFILES :=  snachd snachd_test
 
-default: all
+# Library files
+SHAREDLIBS := 
+
+.PHONY: default clean
+
+all: default
 
 include /usr/share/make-common/common.1.mk
 
-all: $(LIBFILES) $(BINFILES)
-
-# apparently ach requires this, or at least c99
+CFLAGS += -O0 -Wno-conversion
 CFLAGS += --std=gnu99
 
-include/js/js_msg.h: msg/js.lisp
-	cd include/js && \
-	  sbcl --noinform --noprint --eval "(require 'genmsg)"\
-	  --load ../../$< --eval "(quit)"
+default: $(LIBFILES) $(BINFILES)
 
-$(call LINKBIN, jsstart, jsstart.o, js)
-$(call LINKBIN, jsd, jsd.o, js ach pthread rt)
-$(call LINKBIN, jscat, jscat.o, js ach pthread rt)
-$(call LINKLIB, js, js.o)
+## BUILDING LIBRARIES: call with  $(call LINKLIB, name_of_lib, list of object files)
 
 
-## must explicitly specify for the generate header
-jsd.o: include/js/js_msg.h
-jscat.o: include/js/js_msg.h
+## BUILDING BINARIES: call with $(call LINKBIN, name_of_binary, object files, shared libs, static libs)
+$(call LINKBIN, snachd, snachd.o, spnav X11 rt somatic ach somatic_pb-c protobuf-c stdc++ blas lapack)
+$(call LINKBIN, snachd_test, snachd_test.o, spnav X11 rt somatic ach somatic_pb-c protobuf-c stdc++ blas lapack)
 
-clean: 
-	rm -vf *.o *.so jsstart jsd include/js/js_msg.h jscat *.deb  *.lzma
-	rm -rf .deps debian doc $(PROJECT)-$(VERSION)
-
-doc:
-	doxygen
+clean:
+	rm -fr *.o $(BINFILES) $(LIBFILES) *.o .dep debian *.deb *.lzma
