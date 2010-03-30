@@ -5,7 +5,7 @@ PROJECT := snachd
 VERSION := 0.1
 
 # Binary Files
-BINFILES :=  snachd jachd
+BINFILES :=  snachd jachd jach_listen_and_print
 
 # Library files
 SHAREDLIBS := jach
@@ -27,7 +27,7 @@ $(call LINKLIB, jach, jach.o)
 ## BUILDING BINARIES: call with $(call LINKBIN, name_of_binary, object files, shared libs, static libs)
 $(call LINKBIN, snachd, snachd.o jach.o, spnav X11 rt somatic ach somatic_pb-c protobuf-c stdc++ blas lapack)
 $(call LINKBIN, jachd, jachd.o jach.o js.o, spnav X11 rt somatic ach somatic_pb-c protobuf-c stdc++ blas lapack)
-#$(call LINKBIN, snachd_test, snachd_test.o, spnav X11 rt somatic ach somatic_pb-c protobuf-c stdc++ blas lapack)
+$(call LINKBIN, jach_listen_and_print, jach_listen_and_print.o jach.o, rt somatic ach somatic_pb-c protobuf-c stdc++ blas lapack)
 
 clean:
 	rm -fr *.o $(BINFILES) $(LIBFILES) *.o .dep debian *.deb *.lzma
