@@ -1,0 +1,5 @@
+Files:
+js - basic wrapper for polling a joystick (logitech gamepad)
+jach - shared library containing calls for both jachd and snachd, the joystick and spacenav publishers
+jachd - the joystick publisher
+snachd - the spacenav publisher 
