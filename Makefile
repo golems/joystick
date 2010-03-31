@@ -1,5 +1,5 @@
 # Project Name
-PROJECT := snachd
+PROJECT := joystick
 
 # Project Version 
 VERSION := 0.1
@@ -8,7 +8,7 @@ VERSION := 0.1
 BINFILES :=  snachd jachd jach_listen_and_print
 
 # Library files
-SHAREDLIBS := jach
+SHAREDLIBS := js_smm
 
 .PHONY: default clean
 
@@ -22,12 +22,12 @@ CFLAGS += --std=gnu99
 default: $(LIBFILES) $(BINFILES)
 
 ## BUILDING LIBRARIES: call with  $(call LINKLIB, name_of_lib, list of object files)
-$(call LINKLIB, jach, jach.o)
+$(call LINKLIB, js_smm, js_smm.o)
 
 ## BUILDING BINARIES: call with $(call LINKBIN, name_of_binary, object files, shared libs, static libs)
-$(call LINKBIN, snachd, snachd.o jach.o, spnav X11 rt somatic ach somatic_pb-c protobuf-c stdc++ blas lapack)
-$(call LINKBIN, jachd, jachd.o jach.o js.o, spnav X11 rt somatic ach somatic_pb-c protobuf-c stdc++ blas lapack)
-$(call LINKBIN, jach_listen_and_print, jach_listen_and_print.o jach.o, rt somatic ach somatic_pb-c protobuf-c stdc++ blas lapack)
+$(call LINKBIN, snachd, snachd.o js_smm.o js.o, spnav X11 rt somatic ach somatic_pb-c protobuf-c stdc++ blas lapack)
+$(call LINKBIN, jachd, jachd.o js_smm.o js.o, spnav X11 rt somatic ach somatic_pb-c protobuf-c stdc++ blas lapack)
+$(call LINKBIN, jach_listen_and_print, jach_listen_and_print.o js_smm.o js.o, spnav X11 rt somatic ach somatic_pb-c protobuf-c stdc++ blas lapack)
 
 clean:
 	rm -fr *.o $(BINFILES) $(LIBFILES) *.o .dep debian *.deb *.lzma
