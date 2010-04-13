@@ -1,3 +1,0 @@
-Maintainer: Neil T. Dantam
-Description: A library and ach/genmsg daemon for joystick access
-Depends: somatic, ach, genmsg
