@@ -1,5 +1,5 @@
 # Project Name
-PROJECT := joystick
+PROJECT := achjoystick
 
 # Project Version 
 VERSION := 0.1
