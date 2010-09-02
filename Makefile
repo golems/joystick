@@ -24,9 +24,9 @@ default: $(LIBFILES) $(BINFILES)
 ## BUILDING LIBRARIES: call with  $(call LINKLIB, name_of_lib, list of object files)
 
 ## BUILDING BINARIES: call with $(call LINKBIN, name_of_binary, object files, shared libs, static libs)
-$(call LINKBIN, snachd, snachd.o, spnav X11 rt somatic ach protobuf-c stdc++ blas lapack)
-$(call LINKBIN, jachd, jachd.o js.o, rt somatic ach protobuf-c stdc++ blas lapack)
-$(call LINKBIN, jach_listen_and_print, jach_listen_and_print.o, rt somatic ach protobuf-c stdc++ blas lapack)
+$(call LINKBIN, snachd, snachd.o, spnav X11 rt amino somatic ach protobuf-c stdc++ blas lapack)
+$(call LINKBIN, jachd, jachd.o js.o, rt amino somatic ach protobuf-c stdc++ blas lapack)
+$(call LINKBIN, jach_listen_and_print, jach_listen_and_print.o, rt amino somatic ach protobuf-c stdc++ blas lapack)
 
 clean:
 	rm -fr *.o $(BINFILES) $(LIBFILES) *.o .dep debian *.deb *.lzma
