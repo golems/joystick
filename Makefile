@@ -5,7 +5,7 @@ PROJECT := achjoystick
 VERSION := 0.1
 
 # Binary Files
-BINFILES :=  snachd jachd jach_listen_and_print
+BINFILES :=  jachd
 
 # Library files
 SHAREDLIBS := 
