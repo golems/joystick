@@ -5,7 +5,7 @@ include_HEADERS = include/gamepad.h
 
 bin_PROGRAMS = joyd
 
-bin_SCRIPTS = scripts/joyd-logitech-f310
+bin_SCRIPTS = scripts/joyd-logitech-f310 scripts/joyd-logitech-dual-action
 
 joyd_SOURCES = joyd.c js.c
 joyd_LDADD = -lsns -lach -lblas -llapack
