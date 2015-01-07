@@ -18,6 +18,7 @@ AC_C_RESTRICT
 AC_C_INLINE
 AC_C_CONST
 
+AC_SEARCH_LIBS([timer_settime],[rt])
 
 # Enable maximum warnings
 m4_ifdef([AX_CFLAGS_WARN_ALL],
